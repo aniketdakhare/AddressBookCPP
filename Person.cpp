@@ -13,6 +13,8 @@ class Person
         int zipCode;
         string phoneNumber;
 
+        Person(){}
+
         Person(string firstName, string lastName, string address, string city, string state, int zipCode, string phoneNumber)
         {
             this->firstName=firstName;

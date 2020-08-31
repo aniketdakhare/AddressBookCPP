@@ -1,11 +1,26 @@
 #include <iostream>
-#include "Person.cpp"
+#include "AddressBookDetails.cpp"
+#include "UserInputs.cpp"
 
 using namespace std;
 
+void addDetails()
+{
+    AddressBook addressBook;
+    UserInput userInput;
+    string firstName = userInput.getFirstName();
+    string lastName = userInput.getLastName();
+    string address = userInput.getAddress();
+    string city = userInput.getCity();
+    string state = userInput.getState();
+    int zipcode = userInput.getZipCode();
+    string phoneNumber = userInput.getPhoneNumber();
+    Person person(firstName, lastName, address, city, state, zipcode, phoneNumber);
+    addressBook.addPersonDetails(person);
+    addressBook.display();
+}
+
 int main()
 {
-    Person person("Aniket", "Dakhare", "Dhanori", "Pune", "Maharashtra", 443445, "9988997856");
-    cout << "NAME: " << person.firstName << " " << person.lastName << "  ADDRESS: " << person.address << "  CITY: " << person.city;
-    cout << "  STATE: " << person.state << "  ZIPCODE: " << person.zipCode << "  PHONE NO.: " << person.phoneNumber << endl;
+    addDetails();
 }
