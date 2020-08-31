@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Person.cpp"
+#include "UserInputs.cpp"
 
 using namespace std;
 
@@ -9,12 +10,23 @@ class AddressBook
         Person person;
         
         void addPersonDetails(Person person);
+        void editPersonDetails();
         void display();
 };
 
 void AddressBook :: addPersonDetails(Person person)
 {
     this->person = person;
+}
+
+void AddressBook :: editPersonDetails()
+{
+    UserInput userInput;
+    person.address = userInput.getAddress();
+    person.city = userInput.getCity();
+    person.state = userInput.getState();
+    person.zipCode = userInput.getZipCode();
+    person.phoneNumber= userInput.getPhoneNumber();
 }
 
 void AddressBook :: display()
