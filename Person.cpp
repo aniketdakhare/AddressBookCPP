@@ -10,12 +10,23 @@ class Person
         string address;
         string city;
         string state;
-        int zipCode;
+        string zipCode;
         string phoneNumber;
 
         Person(){}
 
-        Person(string firstName, string lastName, string address, string city, string state, int zipCode, string phoneNumber)
+        ~Person()
+        {
+            firstName.clear();
+            lastName.clear();
+            address.clear();
+            city.clear();
+            state.clear();
+            zipCode.clear();
+            phoneNumber.clear();
+        }
+
+        Person(string firstName, string lastName, string address, string city, string state, string zipCode, string phoneNumber)
         {
             this->firstName=firstName;
             this->lastName=lastName;

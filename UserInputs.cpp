@@ -10,7 +10,7 @@ class  UserInput
         string getAddress();
         string getCity();
         string getState();
-        int getZipCode();
+        string getZipCode();
         string getPhoneNumber();
 };
 
@@ -62,9 +62,9 @@ string UserInput::getPhoneNumber()
     return phoneNumber;
 }
 
-int UserInput::getZipCode()
+string UserInput::getZipCode()
 {
-    int zipCode;
+    string zipCode;
     cout << "Enter your Phone Zipcode:  ";
     cin >> zipCode;
     return zipCode;

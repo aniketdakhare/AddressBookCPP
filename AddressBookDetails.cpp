@@ -11,6 +11,7 @@ class AddressBook
         
         void addPersonDetails(Person person);
         void editPersonDetails();
+        void deletePersonDetails();
         void display();
 };
 
@@ -26,7 +27,12 @@ void AddressBook :: editPersonDetails()
     person.city = userInput.getCity();
     person.state = userInput.getState();
     person.zipCode = userInput.getZipCode();
-    person.phoneNumber= userInput.getPhoneNumber();
+    person.phoneNumber = userInput.getPhoneNumber();
+}
+
+void AddressBook :: deletePersonDetails()
+{
+    person.~Person();
 }
 
 void AddressBook :: display()
