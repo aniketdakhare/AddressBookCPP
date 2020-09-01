@@ -9,6 +9,7 @@ class AddressBook
 {
     private:
         void editSpecificField(Person& person);
+        bool isPersonPresent(Person person);
 
     public:
         Person person;
@@ -23,7 +24,24 @@ class AddressBook
 
 void AddressBook :: addPersonDetails(Person person)
 {
-    addressBookList.push_back(person);
+    if (isPersonPresent(person) == false)
+    {
+        addressBookList.push_back(person);
+        return;
+    }
+    cout << "\nRecord already exist." << endl;   
+}
+
+bool AddressBook :: isPersonPresent(Person person)
+{
+    for (list<Person> :: iterator personDetails = addressBookList.begin(); personDetails != addressBookList.end(); personDetails++)
+    {
+        if (personDetails->firstName == person.firstName && personDetails->lastName == person.lastName)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 void AddressBook :: editPersonDetails(string firstName, string lastName)
