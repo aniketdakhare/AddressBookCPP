@@ -20,7 +20,7 @@ class AddressBook
         void addPersonDetails(Person person);
         void editPersonDetails(string name);
         void deletePersonDetails(string name);
-        void sortByName();
+        void sortBy(int choise);
 };
 
 void AddressBook :: addPersonDetails(Person person)
@@ -119,7 +119,7 @@ void AddressBook :: deletePersonDetails(string name)
     }
 }
 
-void AddressBook ::sortByName()
+void AddressBook ::sortBy(int choise)
 {
     if (addressBookList.empty())
     {
@@ -127,10 +127,36 @@ void AddressBook ::sortByName()
         return;
     }
 
-    addressBookList.sort([](const Person &f, const Person &s) { 
-        if(f.name == s.name)
-            return &f < &s;
-        return f.name < s.name;});
+    switch (choise)
+    {
+        case 1:
+            addressBookList.sort([](const Person &firstPerson, const Person &secondPerson) { 
+                if(firstPerson.name == secondPerson.name)
+                    return &firstPerson < &secondPerson;
+                return firstPerson.name < secondPerson.name;});
+            break;
+        case 2:
+            addressBookList.sort([](const Person &firstPerson, const Person &secondPerson) { 
+                if(firstPerson.zipCode == secondPerson.zipCode)
+                    return &firstPerson < &secondPerson;
+                return firstPerson.zipCode < secondPerson.zipCode;});
+            break;
+        case 3:
+            addressBookList.sort([](const Person &firstPerson, const Person &secondPerson) { 
+                if(firstPerson.city == secondPerson.city)
+                    return &firstPerson < &secondPerson;
+                return firstPerson.city < secondPerson.city;});
+            break;
+        case 4:
+            addressBookList.sort([](const Person &firstPerson, const Person &secondPerson) { 
+                if(firstPerson.state == secondPerson.state)
+                    return &firstPerson < &secondPerson;
+                return firstPerson.state < secondPerson.state;});
+            break;
+        default:
+            cout << "\nInvalid Input" << endl;
+            break;
+    }
     
     display();
 }

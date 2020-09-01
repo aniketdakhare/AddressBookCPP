@@ -11,7 +11,7 @@ void presentChoice()
     {
         int choice;
         cout << "\n\nSelect & enter the task you want to do: \n1: Add details \n2: Edit Person Details \n3: Delete Person Details";
-        cout << "\n4: Display sorted details by name. \n5: Exit" << endl;
+        cout << "\n4: Display address book details sorted by name, city, zipcode or state. \n5: Exit" << endl;
         cin >> choice;
 
         switch (choice)
@@ -47,7 +47,7 @@ void presentChoice()
                 }
                 break;
             case 4:
-                addressBook.sortByName();
+                addressBook.sortBy(userInput.selectFieldToSort());
                 break;
             case 5:
                 exit(0);

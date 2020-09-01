@@ -80,3 +80,12 @@ int UserInput :: selectFieldToEdit()
     cin >> choice;
     return choice;
 }
+
+int UserInput :: selectFieldToSort()
+{
+    int choice;
+    cout << "Select the type of sorting you want to do. \n1: Sort by name";
+    cout << "\n2: Sort by ZipCode \n3: Sort by City \n4: Sort by State" << endl;
+    cin >> choice;
+    return choice;
+}
