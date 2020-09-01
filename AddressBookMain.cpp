@@ -10,8 +10,8 @@ void presentChoice()
     while (true)
     {
         int choice;
-        cout << "\n\nSelect & enter the task you want to do: \n1: Add details \n2: Edit Person Details \n3: Delete Person Details";
-        cout << "\n4: Display address book details sorted by name, city, zipcode or state. \n5: Exit" << endl;
+        cout << "\n\nSelect & enter the task you want to do: \n1: Add details \n2: Edit Person Details \n3: Delete Person Details \n4: Display address book ";
+        cout << "details sorted by name, city, zipcode or state. \n5: Display address book details by state and city name. \n6: Exit" << endl;
         cin >> choice;
 
         switch (choice)
@@ -50,6 +50,13 @@ void presentChoice()
                 addressBook.sortBy(userInput.selectFieldToSort());
                 break;
             case 5:
+                {
+                    string city = userInput.getCity();
+                    string state = userInput.getState();
+                    addressBook.displayByCityAndState(city, state);
+                }
+                break;
+            case 6:
                 exit(0);
         }
     }

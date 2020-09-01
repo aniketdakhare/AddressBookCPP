@@ -10,7 +10,7 @@ class AddressBook
     private:
         void editSpecificField(Person& person);
         bool isPersonPresent(Person person);
-        void display();
+        void display(list<Person> addressBookList);
 
     public:
         Person person;
@@ -21,6 +21,7 @@ class AddressBook
         void editPersonDetails(string name);
         void deletePersonDetails(string name);
         void sortBy(int choise);
+        void displayByCityAndState(string city, string state);
 };
 
 void AddressBook :: addPersonDetails(Person person)
@@ -158,10 +159,31 @@ void AddressBook ::sortBy(int choise)
             break;
     }
     
-    display();
+    display(addressBookList);
 }
 
-void AddressBook :: display()
+void AddressBook :: displayByCityAndState(string city, string state)
+{
+    list<Person> addressBook;
+
+    for (list<Person> :: iterator person = addressBookList.begin(); person != addressBookList.end(); person++)
+    {
+        if (person->city == city && person->state == state)
+        {
+            addressBook.push_back(*person);
+        }
+    }
+
+    if (addressBook.empty())
+    {
+        cout << "\nRecord doesn't exist" << endl;
+        return;
+    }
+    
+    display(addressBook);
+}
+
+void AddressBook :: display(list<Person> addressBookList)
 {
     for (Person person : addressBookList)
     {
