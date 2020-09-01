@@ -1,4 +1,5 @@
 #include <iostream>
+#include <list>
 #include "Person.cpp"
 #include "UserInputs.cpp"
 
@@ -6,38 +7,111 @@ using namespace std;
 
 class AddressBook
 {
+    private:
+        void editSpecificField(Person& person);
+
     public:
         Person person;
+        UserInput userInput;
+        list<Person> addressBookList;
         
         void addPersonDetails(Person person);
-        void editPersonDetails();
-        void deletePersonDetails();
+        void editPersonDetails(string firstName, string lastName);
+        void deletePersonDetails(string firstName, string lastName);
         void display();
 };
 
 void AddressBook :: addPersonDetails(Person person)
 {
-    this->person = person;
+    addressBookList.push_back(person);
 }
 
-void AddressBook :: editPersonDetails()
+void AddressBook :: editPersonDetails(string firstName, string lastName)
 {
-    UserInput userInput;
-    person.address = userInput.getAddress();
-    person.city = userInput.getCity();
-    person.state = userInput.getState();
-    person.zipCode = userInput.getZipCode();
-    person.phoneNumber = userInput.getPhoneNumber();
+    bool check = true;
+
+    for (list<Person> :: iterator person = addressBookList.begin(); person != addressBookList.end(); person++)
+    {
+        if (person->firstName == firstName && person->lastName == lastName)
+        {
+            editSpecificField(*person);
+            check = false;
+            break;
+        }
+    }
+
+    if (check == true)
+    {
+        cout << "\nRecord doesn't exist" << endl;
+    }
 }
 
-void AddressBook :: deletePersonDetails()
+void AddressBook :: editSpecificField(Person& person)
 {
-    person.~Person();
+    bool flag = true;
+    
+    while (flag)
+    {
+        int selectField = userInput.selectFieldToEdit();
+    
+        switch (selectField)
+        {
+            case 1:
+                person.address = userInput.getAddress();
+                break;
+            case 2:
+                person.city = userInput.getCity();
+                break;
+            case 3:
+                person.state = userInput.getState();
+                break;
+            case 4:
+                person.zipCode = userInput.getZipCode();
+                break;
+            case 5:
+                person.phoneNumber = userInput.getPhoneNumber();
+                break;
+            case 6:
+                flag = false;
+                break;
+            default:
+                cout << "\nPlease Select valid Input." << endl;
+        }
+    }
+}
+
+void AddressBook :: deletePersonDetails(string firstName, string lastName)
+{
+    bool check = true;
+
+    for (list<Person> :: iterator person = addressBookList.begin(); person != addressBookList.end(); person++)
+    {
+        if (person->firstName == firstName && person->lastName == lastName)
+        {
+            addressBookList.erase(person);
+            check = false;
+            break;
+        }
+    }
+
+    if (check == true)
+    {
+        cout << "\nRecord doesn't exist" << endl;
+    }
 }
 
 void AddressBook :: display()
 {
+    if (addressBookList.empty())
+    {
+        cout << "\nNo records present" << endl;
+    }
+    
+    for (Person person : addressBookList)
+    {
+        cout << "----------------------------------------------------------------------------------------------------------------------" << endl;
+        cout << "NAME: " << person.firstName << " " << person.lastName << "  ADDRESS: " << person.address << "  CITY: " << person.city;
+        cout << "  STATE: " << person.state << "  ZIPCODE: " << person.zipCode << "  PHONE NO.: " << person.phoneNumber << endl;   
+    }
     cout << "----------------------------------------------------------------------------------------------------------------------" << endl;
-    cout << "NAME: " << person.firstName << " " << person.lastName << "  ADDRESS: " << person.address << "  CITY: " << person.city;
-    cout << "  STATE: " << person.state << "  ZIPCODE: " << person.zipCode << "  PHONE NO.: " << person.phoneNumber << endl;
 }
