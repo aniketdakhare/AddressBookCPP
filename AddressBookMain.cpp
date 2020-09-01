@@ -9,12 +9,7 @@ void presentChoice()
     
     while (true)
     {
-        int choice;
-        cout << "\n\nSelect & enter the task you want to do: \n1: Add details \n2: Edit Person Details \n3: Delete Person Details \n4: Display address book ";
-        cout << "details sorted by name, city, zipcode or state. \n5: Display address book details by state and city name. \n6: Exit" << endl;
-        cin >> choice;
-
-        switch (choice)
+        switch (userInput.selectChoiceToPerformOperation())
         {
             case 1:
                 {
@@ -57,6 +52,12 @@ void presentChoice()
                 }
                 break;
             case 6:
+                {
+                    string place = userInput.getCityOrStateName();
+                    addressBook.displayByCityOrState(place);
+                }
+                break;
+            case 7:
                 exit(0);
         }
     }

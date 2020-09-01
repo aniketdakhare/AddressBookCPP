@@ -22,6 +22,7 @@ class AddressBook
         void deletePersonDetails(string name);
         void sortBy(int choise);
         void displayByCityAndState(string city, string state);
+        void displayByCityOrState(string place);
 };
 
 void AddressBook :: addPersonDetails(Person person)
@@ -168,10 +169,8 @@ void AddressBook :: displayByCityAndState(string city, string state)
 
     for (list<Person> :: iterator person = addressBookList.begin(); person != addressBookList.end(); person++)
     {
-        if (person->city == city && person->state == state)
-        {
-            addressBook.push_back(*person);
-        }
+        (city != state) ? ( (person->city == city && person->state == state) ? addressBook.push_back(*person) : void() ) :
+        ((city == state) ? ((person->city == city || person->state == state) ? addressBook.push_back(*person) : void()) : void());
     }
 
     if (addressBook.empty())
@@ -181,6 +180,11 @@ void AddressBook :: displayByCityAndState(string city, string state)
     }
     
     display(addressBook);
+}
+
+void AddressBook ::displayByCityOrState(string place)
+{
+    displayByCityAndState(place, place);
 }
 
 void AddressBook :: display(list<Person> addressBookList)
