@@ -39,10 +39,7 @@ bool AddressBook :: isPersonPresent(Person person)
 {
     for (list<Person> :: iterator personDetails = addressBookList.begin(); personDetails != addressBookList.end(); personDetails++)
     {
-        if (personDetails->name == person.name)
-        {
-            return true;
-        }
+        return (personDetails->name == person.name) ? true : bool();
     }
     return false;
 }
@@ -132,28 +129,20 @@ void AddressBook ::sortBy(int choise)
     switch (choise)
     {
         case 1:
-            addressBookList.sort([](const Person &firstPerson, const Person &secondPerson) { 
-                if(firstPerson.name == secondPerson.name)
-                    return &firstPerson < &secondPerson;
-                return firstPerson.name < secondPerson.name;});
+            addressBookList.sort([](const Person &firstPerson, const Person &secondPerson) 
+            { return (firstPerson.name == secondPerson.name) ? &firstPerson < &secondPerson : firstPerson.name < secondPerson.name; });
             break;
         case 2:
-            addressBookList.sort([](const Person &firstPerson, const Person &secondPerson) { 
-                if(firstPerson.zipCode == secondPerson.zipCode)
-                    return &firstPerson < &secondPerson;
-                return firstPerson.zipCode < secondPerson.zipCode;});
+            addressBookList.sort([](const Person &firstPerson, const Person &secondPerson) 
+            { return (firstPerson.zipCode == secondPerson.zipCode) ? &firstPerson < &secondPerson : firstPerson.zipCode < secondPerson.zipCode; });
             break;
         case 3:
-            addressBookList.sort([](const Person &firstPerson, const Person &secondPerson) { 
-                if(firstPerson.city == secondPerson.city)
-                    return &firstPerson < &secondPerson;
-                return firstPerson.city < secondPerson.city;});
+            addressBookList.sort([](const Person &firstPerson, const Person &secondPerson) 
+            { return (firstPerson.city == secondPerson.city) ? &firstPerson < &secondPerson : firstPerson.city < secondPerson.city; });
             break;
         case 4:
-            addressBookList.sort([](const Person &firstPerson, const Person &secondPerson) { 
-                if(firstPerson.state == secondPerson.state)
-                    return &firstPerson < &secondPerson;
-                return firstPerson.state < secondPerson.state;});
+            addressBookList.sort([](const Person &firstPerson, const Person &secondPerson)
+            { return (firstPerson.state == secondPerson.state) ? &firstPerson < &secondPerson : firstPerson.state < secondPerson.state; });
             break;
         default:
             cout << "\nInvalid Input" << endl;
