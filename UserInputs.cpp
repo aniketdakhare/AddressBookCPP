@@ -13,6 +13,7 @@ class  UserInput
         string getZipCode();
         string getPhoneNumber();
         int selectFieldToEdit();
+        int selectFieldToSort();
 };
 
 string UserInput::getFirstName()
@@ -66,16 +67,16 @@ string UserInput::getPhoneNumber()
 string UserInput::getZipCode()
 {
     string zipCode;
-    cout << "Enter your Phone Zipcode:  ";
+    cout << "Enter your Zipcode:  ";
     cin >> zipCode;
     return zipCode;
 }
 
 int UserInput :: selectFieldToEdit()
 {
-    int select;
+    int choice;
     cout << "Select field to edit details. \n1: Address \n2: City";
     cout << "\n3: State \n4: Zipcode \n5: Phone Number \n6: Save and Exit" << endl;
-    cin >> select;
-    return select;
+    cin >> choice;
+    return choice;
 }

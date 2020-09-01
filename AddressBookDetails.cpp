@@ -10,6 +10,7 @@ class AddressBook
     private:
         void editSpecificField(Person& person);
         bool isPersonPresent(Person person);
+        void display();
 
     public:
         Person person;
@@ -17,9 +18,9 @@ class AddressBook
         list<Person> addressBookList;
         
         void addPersonDetails(Person person);
-        void editPersonDetails(string firstName, string lastName);
-        void deletePersonDetails(string firstName, string lastName);
-        void display();
+        void editPersonDetails(string name);
+        void deletePersonDetails(string name);
+        void sortByName();
 };
 
 void AddressBook :: addPersonDetails(Person person)
@@ -36,7 +37,7 @@ bool AddressBook :: isPersonPresent(Person person)
 {
     for (list<Person> :: iterator personDetails = addressBookList.begin(); personDetails != addressBookList.end(); personDetails++)
     {
-        if (personDetails->firstName == person.firstName && personDetails->lastName == person.lastName)
+        if (personDetails->name == person.name)
         {
             return true;
         }
@@ -44,13 +45,13 @@ bool AddressBook :: isPersonPresent(Person person)
     return false;
 }
 
-void AddressBook :: editPersonDetails(string firstName, string lastName)
+void AddressBook :: editPersonDetails(string name)
 {
     bool check = true;
 
     for (list<Person> :: iterator person = addressBookList.begin(); person != addressBookList.end(); person++)
     {
-        if (person->firstName == firstName && person->lastName == lastName)
+        if (person->name == name)
         {
             editSpecificField(*person);
             check = false;
@@ -98,13 +99,13 @@ void AddressBook :: editSpecificField(Person& person)
     }
 }
 
-void AddressBook :: deletePersonDetails(string firstName, string lastName)
+void AddressBook :: deletePersonDetails(string name)
 {
     bool check = true;
 
     for (list<Person> :: iterator person = addressBookList.begin(); person != addressBookList.end(); person++)
     {
-        if (person->firstName == firstName && person->lastName == lastName)
+        if (person->name == name)
         {
             addressBookList.erase(person);
             check = false;
@@ -118,17 +119,28 @@ void AddressBook :: deletePersonDetails(string firstName, string lastName)
     }
 }
 
-void AddressBook :: display()
+void AddressBook ::sortByName()
 {
     if (addressBookList.empty())
     {
-        cout << "\nNo records present" << endl;
+        cout << "\nNo record present" << endl;
+        return;
     }
+
+    addressBookList.sort([](const Person &f, const Person &s) { 
+        if(f.name == s.name)
+            return &f < &s;
+        return f.name < s.name;});
     
+    display();
+}
+
+void AddressBook :: display()
+{
     for (Person person : addressBookList)
     {
         cout << "----------------------------------------------------------------------------------------------------------------------" << endl;
-        cout << "NAME: " << person.firstName << " " << person.lastName << "  ADDRESS: " << person.address << "  CITY: " << person.city;
+        cout << "NAME: " << person.name << "  ADDRESS: " << person.address << "  CITY: " << person.city;
         cout << "  STATE: " << person.state << "  ZIPCODE: " << person.zipCode << "  PHONE NO.: " << person.phoneNumber << endl;   
     }
     cout << "----------------------------------------------------------------------------------------------------------------------" << endl;

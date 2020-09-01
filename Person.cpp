@@ -5,8 +5,7 @@ using namespace std;
 class Person
 {
     public:
-        string firstName;
-        string lastName;
+        string name;
         string address;
         string city;
         string state;

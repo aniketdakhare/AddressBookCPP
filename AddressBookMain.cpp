@@ -11,7 +11,7 @@ void presentChoice()
     {
         int choice;
         cout << "\n\nSelect & enter the task you want to do: \n1: Add details \n2: Edit Person Details \n3: Delete Person Details";
-        cout << "\n4: Display details. \n5: Exit" << endl;
+        cout << "\n4: Display sorted details by name. \n5: Exit" << endl;
         cin >> choice;
 
         switch (choice)
@@ -19,8 +19,9 @@ void presentChoice()
             case 1:
                 {
                     Person person;
-                    person.firstName = userInput.getFirstName();
-                    person.lastName = userInput.getLastName();
+                    string firstName = userInput.getFirstName();
+                    string lastName = userInput.getLastName();
+                    person.name = (firstName + " " + lastName);
                     person.address = userInput.getAddress();
                     person.city = userInput.getCity();
                     person.state = userInput.getState();
@@ -33,18 +34,20 @@ void presentChoice()
                 {
                     string firstName = userInput.getFirstName();
                     string lastName = userInput.getLastName();
-                    addressBook.editPersonDetails(firstName, lastName);
+                    string name = (firstName + " " + lastName);
+                    addressBook.editPersonDetails(name);
                 }
                 break;
             case 3:
                 {
                     string firstName = userInput.getFirstName();
                     string lastName = userInput.getLastName();
-                    addressBook.deletePersonDetails(firstName, lastName);
+                    string name = (firstName + " " + lastName);
+                    addressBook.deletePersonDetails(name);
                 }
                 break;
             case 4:
-                addressBook.display();
+                addressBook.sortByName();
                 break;
             case 5:
                 exit(0);
